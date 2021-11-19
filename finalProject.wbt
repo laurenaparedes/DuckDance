@@ -1,0 +1,62 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  basicTimeStep 16
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.7140338770964236 0.6874649231114465 0.13246736145187846 0.4763934212699626
+  position 1.1626258433991987 1.5407280424410466 3.5859342590121757
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 3 3
+}
+UnevenTerrain {
+}
+WoodenBox {
+  translation 0.311483 0.05 -0.179576
+  name "wooden box(1)"
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+WoodenBox {
+  translation 0.071483 0.05 0.190424
+  name "wooden box(2)"
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+WoodenBox {
+  translation -0.408517 0.05 -0.409576
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+E-puck {
+  translation -0.08 0 0.08
+  controller "epuck_go_forward"
+}
+DEF BALL Solid {
+  translation -0.08 0.2 -0.2
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "textures/red_brick_wall.jpg"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry DEF BALL_GEOMETRY Sphere {
+        radius 0.05
+        subdivision 2
+      }
+    }
+  ]
+  boundingObject USE BALL_GEOMETRY
+  physics Physics {
+  }
+}
