@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.610036593061665 -0.5130491807058715 -0.6038508866456607 4.108072503972005
-  position -1.055985209853401 35.36388358369932 16.794488404006827
+  orientation 0.532612698399652 -0.5920134746188139 -0.6048501958114919 4.112786402202066
+  position 4.679270015175837 18.76308061630109 9.899271790978315
   follow "fence(2)"
 }
 TexturedBackground {
@@ -123,7 +123,8 @@ RectangleArena {
   }
 }
 TurtleBot3Burger {
-  translation -2 0 -11.17
+  translation 3.92 0 11.22
+  controller "finalTurtlebot"
 }
 Oak {
   translation 2.52 0 -11.95
@@ -204,19 +205,6 @@ Floor {
   size 2 30
   appearance Pavement {
   }
-}
-UnevenTerrain {
-  translation 0 -10.36 0
-  size 10 0.3 10
-  xDimension 10
-  zDimension 10
-  appearance Grass {
-    IBLStrength 5
-  }
-}
-E-puck {
-  translation -0.08 0 -12.62
-  controller "epuck_go_forward"
 }
 Swing {
   translation 11.232 0 9.45703
@@ -409,13 +397,13 @@ SimpleTree {
   subdivision 5
 }
 TiagoSteel {
-  translation 2.76645 0.0695066 10.941
+  translation 2.58032 0.111331 10.0546
   rotation 0.9310809087605929 0.2756919729841178 0.23891897658761382 -1.6198753071795862
   controller "final"
   cameraSlot [
     Display {
-      width 360
-      height 360
+      width 900
+      height 900
     }
     Compass {
       translation -0.206 0 -0.041438

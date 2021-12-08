@@ -2,8 +2,13 @@
 # Copyright Prof. Bradley Hayes <bradley.hayes@colorado.edu> 2021
 # University of Colorado Boulder CSCI 3302 "Introduction to Robotics" Lab 3 Base Code.
 
-from controller import Robot, Motor
+from controller import Robot, Motor, Camera, RangeFinder, Lidar, Keyboard, CameraRecognitionObject
 import math
+import numpy as np
+from matplotlib import pyplot as plt
+from scipy.signal import convolve2d # Uncomment if you want to use something else for finding the configuration space
+# from ikpy.chain import Chain
+# from ikpy.link import OriginLink, URDFLink
 
 # https://emanual.robotis.com/docs/en/platform/turtlebot3/features/
 # TODO: Fill out with correct values from Robot Spec Sheet (or inspect PROTO definition for the robot)
@@ -29,6 +34,17 @@ part_names = ("left wheel motor", "right wheel motor")
 target_pos = ('inf', 'inf')
 robot_parts = []
 
+class Node():
+    """A node class for A* Pathfinding"""
+    def __init__(self, parent=None, position=None):
+        self.parent = parent
+        self.position = position
+        self.g = 0
+        self.h = 0
+        self.f = 0
+
+    def __eq__(self, other):
+        return self.position == other.position
 
 def path_planner(map, start, end):
         '''
@@ -143,42 +159,81 @@ vL = 0
 vR = 0
 
 # goals = [(1.5, 1), (3, 5)]
-goalsX = [1.5, 
-            2,
-            2,
-            1.74, 
-            1.5,
-            1,
-            .25,
-            .1,
-           .1234]
-goalsY = [1, 
-            2,
-            3,
-            3.75,
-            4,
-            4.5,
-            5,
-            5.5,
-            5.1]
+# goalsX = [1.5, 
+            # 2,
+            # 2,
+            # 1.74, 
+            # 1.5,
+            # 1,
+            # .25,
+            # .1,
+           # .1234]
+# goalsY = [1, 
+            # 2,
+            # 3,
+            # 3.75,
+            # 4,
+            # 4.5,
+            # 5,
+            # 5.5,
+            # 5.1]
 
 #for each robot we need to add their start and end points from astar
-startInMeters = (,)
-endInMeters = (,)
+#starting spot will be the same end will not
+startInMeters = (3.9,11.2)
+endInMeters = (5,8.8)
 
-start = #need to figure out scaling
-end = #need to figure out scaling
+start = (int(startInMeters[0] * 30), int(startInMeters[1] *30))
+end = (int(endInMeters[0] * 30), int(endInMeters[1] *30))
 #need to load in map from tiago steel
-map = np.load("map.npy")
+#map = np.load("convolved_map.npy")
 
 #put into aStar 
-path = path_planner(map,start,end)
+#path = path_planner(map,start,end)
+#print(path)
 #from here we need to actually drive along the path
+
+loadMap = np.load('map.npy')
+
+# Part 2.2: Compute an approximation of the “configuration space”
+kernel = np.ones((8, 8)) # Play with this number to find something suitable
+convolved_map = convolve2d(loadMap, kernel, mode ='same') # You still have to threshold this convolved map
+    
+convolved_map = np.multiply(convolved_map >0.5,1)
+        
+fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+plt.imshow(convolved_map)
+plt.show()
+       
+    # th, start_w = cv2.threshold(convolved_map, thresholded_map, 0, 255, cv2.THRESH_BINARY)
+
+        # create a temp copy of the map array
+        # for every 1 in the map array in the temp one make all surrounding blocks a 1 as well (like a square around)
+        # repeat that a couple times to make the squares “denser”
+    
+# Part 2.3 continuation: Call path_planner
+# np.save("convolved_map", convolved_map)
+    
+path = path_planner(convolved_map, start, end)
+waypoints = []
+for p in path:
+    g = ((p[0]) / 30, p[1] / 30)
+    waypoints.append(g)
+np.save("path", waypoints)
+        
+    # Part 2.4: Turn paths into waypoints and save on disk as path.npy and visualize it
+    # np.save("path", path)
+waypoints = np.load('path.npy')
+for p in path: convolved_map[p[0]][p[1]] = 2
+fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+plt.imshow(convolved_map)
+plt.show()
+
 state =0
 counter =0
 while robot.step(timestep) != -1:
     #Stopping criteria
-    if state == len(goalsX)-1:
+    if state == len(waypoints[state])-1:
         robot_parts[MOTOR_LEFT].setVelocity(0)
         robot_parts[MOTOR_RIGHT].setVelocity(0)
         break
@@ -190,16 +245,14 @@ while robot.step(timestep) != -1:
         continue
 
 
-
-
      #STEP 2: Calculate sources of error
-    distanceError = math.sqrt((pose_x - path[state][0])**2 + (pose_y - path[state][1])**2)
+    distanceError = math.sqrt((pose_x - waypoints[state][0])**2 + (pose_y - waypoints[state][1])**2)
     
-    bearingError = math.atan2((path[state][1] - pose_y),(path[state][0] - pose_x)) - pose_theta
+    bearingError = math.atan2((waypoints[state][1] - pose_y),(waypoints[state][0] - pose_x)) - pose_theta
     if bearingError < -3.1415: bearingError += 6.283
     # if eta < -3.1415: eta += 6.283
    
-    headingError = math.atan2((path[state+1][1] - pose_y),(gpath[state+1][0] - pose_x)) - pose_theta
+    headingError = math.atan2((waypoints[state+1][1] - pose_y),(waypoints[state+1][0] - pose_x)) - pose_theta
     
     
     if distanceError <.2 and abs(headingError) < 3.1415/4:
@@ -275,5 +328,3 @@ while robot.step(timestep) != -1:
     # TODO: Set robot motors to the desired velocities
     robot_parts[MOTOR_LEFT].setVelocity(vL)
     robot_parts[MOTOR_RIGHT].setVelocity(vR)
-
-    
