@@ -1,0 +1,540 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  basicTimeStep 16
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.532612698399652 -0.5920134746188139 -0.6048501958114919 4.112786402202066
+  position 4.679270015175837 18.76308061630109 9.899271790978315
+  follow "fence(2)"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+CircleArena {
+  translation 0 0.01 0
+  radius 9
+  floorAppearance BrushedAluminium {
+  }
+  wallThickness 0.2
+  subdivision 40
+}
+Bench {
+  translation 0 0 -11.3
+}
+Bench {
+  translation 8.28524 0 -8.14847
+  rotation 0 -1 0 0.785401
+  name "bench(2)"
+}
+Bench {
+  translation -8.06275 0 -8.08448
+  rotation 0 -1 0 -0.7854053071795866
+  name "bench(1)"
+}
+Floor {
+  size 30 30
+  appearance Grass {
+  }
+}
+PaperBoat {
+  translation -3.15958 0.009803799498094262 7.15964
+  rotation 1.0822876633443548e-16 -1 2.883606411371242e-17 0.5235953071795861
+  scale 2
+}
+PaperBoat {
+  translation -1.03535 0.009803799498094262 7.50449
+  rotation -1.466096388780329e-17 -1 -1.3945323958331427e-17 0.261795307179586
+  name "paper boat(1)"
+  scale 2
+}
+StraightRoadSegment {
+  translation 21 0 -17
+  length 34
+}
+ControlledStreetLight {
+  translation 14.1 0 -14.09
+}
+ControlledStreetLight {
+  translation -14.22 0 -14.2
+  name "street light(1)"
+}
+SmallKiosk {
+  translation -6.04753 0 13.5895
+  rotation 0 1 0 -0.261795307179586
+}
+GlassRecyclingContainer {
+  translation -13.4806 0 -7.84753
+  rotation 0 1 0 -0.261795307179586
+}
+DrinkingFountain {
+  translation -7.91 0 12.11
+  rotation 0 1 0 -0.785395307179586
+}
+DrinkingFountain {
+  translation -11.3466 0 8.67332
+  rotation 0 1 0 -0.785395307179586
+  name "drinking fountain(1)"
+}
+SimpleTree {
+  translation 14 0 13
+  name "tree(7)"
+  height 6
+  radius 5
+  subdivision 7
+}
+Oak {
+  translation -8.31 0 -13.78
+  name "oak tree(4)"
+}
+Oak {
+  translation -9.15 0 -11.77
+  name "oak tree(7)"
+}
+Oak {
+  translation -10.87 0 -1.44
+  rotation 0 1 0 0.785398
+  name "oak tree(5)"
+}
+Oak {
+  translation 13.6885 0 -0.952373
+  rotation 0 1 0 0.785398
+  name "oak tree(6)"
+}
+Oak {
+  translation 2.52 0 13.32
+  rotation 0 1 0 1.5708
+  name "oak tree(3)"
+}
+Ball {
+  translation 8.7 0.1099784174659361 10.79
+  rotation 0 1 0 0
+  radius 0.1
+}
+Slide {
+  translation 6.56863 0 9.54728
+  rotation 0 -1 0 0.785397
+}
+RectangleArena {
+  translation 9.53572 0.01 9.33578
+  rotation 0 1 0 -0.785395307179586
+  floorSize 6 7
+  floorAppearance Sand {
+  }
+}
+TurtleBot3Burger {
+  hidden position_0_0 1.9461134880376784e-11
+  hidden position_0_1 3.37935711248516e-12
+  hidden position_0_2 -0.0002708538690952906
+  hidden position2_0_2 -2.9554701493336737e-08
+  hidden position3_0_2 -1.163981745766104e-06
+  hidden rotation_11 -0.9999907601240486 -0.00010969775456849688 -0.0042973983908723475 0.00027085637047373745
+  translation 3.920000000000313 0.009936775830925185 11.220000000008708
+  rotation 0.9999977193276345 1.2485276353705707e-06 0.002135728908513157 0.0011581220090574845
+  controller "finalTurtleBot"
+  extensionSlot [
+    GPS {
+      translation -0.190515 0 -0.015552
+    }
+    RobotisLds01 {
+    }
+  ]
+}
+Oak {
+  translation 2.52 0 -11.95
+}
+Oak {
+  translation 11.25 0 -12.95
+  name "oak tree(8)"
+}
+Oak {
+  translation 13.48 0 -9.99
+  name "oak tree(9)"
+}
+Oak {
+  translation 12.29 0 6.07
+  rotation 0 1 0 0.785398
+  name "oak tree(2)"
+}
+Oak {
+  translation -12.23 0 11.76
+  name "oak tree(1)"
+}
+Oak {
+  translation -13.58 0 9.21
+  name "oak tree(10)"
+}
+Rock17cm {
+  translation 9.29 0 0
+}
+Rock17cm {
+  translation 7.65 0 -5.33
+  name "rock 17 cm(2)"
+}
+Rock17cm {
+  translation 9.25 0 0.56
+  rotation 0 1 0 1.5708
+  name "rock 17 cm(3)"
+}
+Rock17cm {
+  translation 7.66 0 5.31
+  rotation 0 1 0 -2.094395307179586
+  name "rock 17 cm(4)"
+}
+Rock17cm {
+  translation 8.89576 0 -2.81362
+  rotation 0 1 0 1.8326
+  name "rock 17 cm(1)"
+}
+StoneFountain {
+}
+Floor {
+  translation 16 0 0
+  rotation 0 -1 0 0
+  name "floor(1)"
+  size 2 34
+  appearance Pavement {
+  }
+}
+Floor {
+  translation -16 0 0
+  rotation 0 -1 0 0
+  name "floor(2)"
+  size 2 34
+  appearance Pavement {
+  }
+}
+Floor {
+  translation 0 0 16
+  rotation 0 -1 0 1.5707996938995747
+  name "floor(3)"
+  size 2 30
+  appearance Pavement {
+  }
+}
+Floor {
+  translation 0 0 -16
+  rotation 0 -1 0 1.5707996938995747
+  name "floor(4)"
+  size 2 30
+  appearance Pavement {
+  }
+}
+Swing {
+  translation 11.232 0 9.45703
+  rotation 0 -1 0 1.8326
+}
+Fence {
+  translation -15 0 14.92
+  poleGap 0.3
+  path [
+    0 0 0
+    30 0 0
+  ]
+}
+Fence {
+  translation -15 0 -14.9
+  name "fence(1)"
+  poleGap 0.3
+  path [
+    0 0 0
+    30 0 0
+  ]
+}
+Fence {
+  translation -15 0 -14.9
+  rotation 0 1 0 -1.5707996938995747
+  name "fence(2)"
+  poleGap 0.3
+  path [
+    0 0 0
+    30 0 0
+  ]
+}
+Fence {
+  translation 14.96 0 -14.9
+  rotation 0 1 0 -1.5707996938995747
+  name "fence(3)"
+  poleGap 0.3
+  path [
+    0 0 0
+    30 0 0
+  ]
+}
+PublicBin {
+  translation 9.44 0 -6.77
+}
+PublicBin {
+  translation -9.42 0 -6.55
+  name "public bin(3)"
+}
+PublicBin {
+  translation 11.77 0 5.09
+  name "public bin(1)"
+}
+PublicBin {
+  translation -4.2 0 13.33
+  name "public bin(2)"
+}
+SimpleTree {
+  translation -12 0 -11
+  height 6
+  radius 4
+  subdivision 6
+}
+SimpleTree {
+  translation -10 0 14
+  name "tree(6)"
+  height 5
+  radius 4
+  subdivision 6
+}
+SimpleTree {
+  translation 13 0 0
+  name "tree(8)"
+  type "white pine"
+  height 1
+  radius 1
+  subdivision 5
+}
+SimpleTree {
+  translation -13 0 0
+  name "tree(7)"
+  type "crab apple tree"
+  height 5
+  radius 3
+  subdivision 5
+}
+SimpleTree {
+  translation -10 0 11
+  name "tree(7)"
+  type "crab apple tree"
+  height 5
+  radius 3
+  subdivision 5
+}
+SimpleTree {
+  translation 8 0 -12
+  name "tree(7)"
+  type "crab apple tree"
+  height 5
+  radius 3
+  subdivision 5
+}
+SimpleTree {
+  translation 14 0 3
+  name "tree(7)"
+  type "crab apple tree"
+  height 5
+  radius 3
+  subdivision 5
+}
+SimpleTree {
+  translation 3 0 -11
+  name "tree(7)"
+  type "white pine"
+  height 1
+  radius 1
+  subdivision 5
+}
+SimpleTree {
+  translation -3 0 -11
+  name "tree(7)"
+  type "white pine"
+  height 1
+  radius 1
+  subdivision 5
+}
+SimpleTree {
+  translation -6 0 -10
+  name "tree(7)"
+  type "white pine"
+  height 1
+  radius 1
+  subdivision 5
+}
+SimpleTree {
+  translation 12 0 -12
+  name "tree(7)"
+  type "white pine"
+  height 1
+  radius 1
+  subdivision 5
+}
+SimpleTree {
+  translation 13 0 -14
+  name "tree(7)"
+  type "white pine"
+  height 2
+  subdivision 5
+}
+SimpleTree {
+  translation 14 0 -11
+  name "tree(7)"
+  type "white pine"
+  height 2
+  subdivision 5
+}
+SimpleTree {
+  translation -14 0 -14
+  name "tree(7)"
+  type "white pine"
+  height 2
+  subdivision 5
+}
+SimpleTree {
+  translation -14 0 -10
+  name "tree(7)"
+  type "white pine"
+  height 2
+  subdivision 5
+}
+SimpleTree {
+  translation -11 0 -13
+  name "tree(7)"
+  type "white pine"
+  height 2
+  subdivision 5
+}
+SimpleTree {
+  translation 7 0 14
+  name "tree(7)"
+  type "white pine"
+  height 2
+  subdivision 5
+}
+SimpleTree {
+  translation 12 0 13
+  name "tree(7)"
+  type "white pine"
+  height 2
+  subdivision 5
+}
+TiagoSteel {
+  hidden position_0_0 -0.011899320986742006
+  hidden position_0_1 0.0013034833377739282
+  hidden position_0_2 0.024188547033353894
+  hidden position_0_3 0.085736794283836
+  hidden position_0_4 -0.0033236671053409714
+  hidden position_0_5 0.004065238213883582
+  hidden linearVelocity_0 -3.7142483757227875e-07 -1.6926907309044418e-09 6.907284031280443e-07
+  hidden angularVelocity_0 8.972554210223365e-08 -7.195818861535784e-07 4.318970173154747e-08
+  hidden position_1_0 0.08974624523033511
+  hidden translation_2 0 0 0.6897462452303351
+  hidden position_2_0 -2.0981586551187905e-07
+  hidden linearVelocity_2 -4.0339286684831084e-07 -1.4675869991754837e-09 7.609139978836003e-07
+  hidden angularVelocity_2 8.972487988279991e-08 -7.195712757048406e-07 4.318840715419005e-08
+  hidden position_3_0 0.0700000580517595
+  hidden translation_4 0.025099999950005808 0.19399990000582185 -0.171
+  hidden rotation_4 0 0 1 0.00900005805174926
+  hidden position_4_0 1.0199979772240393
+  hidden linearVelocity_4 -4.791222012654466e-07 -7.896791141394658e-09 8.1115444904093e-07
+  hidden angularVelocity_4 8.973041438970005e-08 -7.195715815107866e-07 4.319148938504117e-08
+  hidden rotation_5 0.7842813837172702 -0.4386919746974641 0.4386935861060238 1.8114308967107986
+  hidden position_5_0 -3.1600000953014034
+  hidden linearVelocity_5 -5.185665546444669e-07 -1.5206651598403654e-08 7.713409285778348e-07
+  hidden angularVelocity_5 8.973693297557604e-08 -7.195714965155872e-07 4.3195126721183165e-08
+  hidden rotation_6 0.5808543615917903 -0.5702683479652232 -0.5808633418703651 2.1048999617327877
+  hidden position_6_0 1.2700079202507268
+  hidden linearVelocity_6 -5.906369063061339e-07 -2.5042304820661855e-08 7.572405539065649e-07
+  hidden angularVelocity_6 8.974184511047748e-08 -7.195714639045976e-07 4.3197877861285644e-08
+  hidden rotation_7 -0.977797663424929 -0.14817628791357554 -0.14817394204414694 1.5932502143637028
+  hidden position_7_0 1.3200000000064784
+  hidden linearVelocity_7 -6.006947996580256e-07 -2.498909590683393e-08 7.7902785353724e-07
+  hidden angularVelocity_7 8.974427700856674e-08 -7.195711656606797e-07 4.319924155365527e-08
+  hidden rotation_8 -0.5226930449477362 -0.6734849325864494 0.5226949649100224 1.956179859448513
+  hidden position_8_0 -1.336531809670305e-06
+  hidden linearVelocity_8 -5.313380129185234e-07 -1.3432539750840389e-08 8.274410612135481e-07
+  hidden angularVelocity_8 8.974536421465233e-08 -7.195711561362639e-07 4.319984315879981e-08
+  hidden rotation_9 -0.5773497547590196 -0.5773505264036659 -0.5773505264058478 2.0944007716471718
+  hidden position_9_0 1.4099999999975552
+  hidden linearVelocity_9 -4.931834774140823e-07 -6.899364415260515e-09 8.569975230410543e-07
+  hidden angularVelocity_9 8.974553725630524e-08 -7.195711096998967e-07 4.3199985641332996e-08
+  hidden rotation_10 0.7059610440251466 0.0568807282189822 0.705962879389705 3.02795794829172
+  hidden linearVelocity_10 -4.6661309759063574e-07 -2.3496361837691904e-09 8.775807625868396e-07
+  hidden angularVelocity_10 8.974614594581561e-08 -7.195712191431324e-07 4.3200170761762773e-08
+  hidden position_12_0 6.47565416868915e-07
+  hidden position_12_1 -6.475653787767463e-07
+  hidden translation_33 -6.47565416868915e-07 0 0
+  hidden linearVelocity_33 -4.212120206437141e-07 5.707380836957597e-09 9.174650906135061e-07
+  hidden angularVelocity_33 8.974615742477363e-08 -7.195712179815367e-07 4.320017355987391e-08
+  hidden translation_34 -6.475653787767463e-07 0 0
+  hidden linearVelocity_34 -4.1627584158303715e-07 5.985894982691804e-09 9.118495812920635e-07
+  hidden angularVelocity_34 8.974614662525245e-08 -7.195712239481496e-07 4.320017943302254e-08
+  hidden rotation_35 0 0 -1 2.1073424255447025e-07
+  hidden position_35_0 -1.9270933027115689e-07
+  hidden linearVelocity_35 -4.6654594587993977e-07 -3.1568615274281484e-09 8.622879727765015e-07
+  hidden angularVelocity_35 8.420464518159031e-08 -2.8121131051917587e-06 3.458718928152097e-08
+  hidden rotation_36 0.9999999999999907 9.635431120578022e-08 -9.635466513557785e-08 1.5708000000000089
+  hidden linearVelocity_36 -5.12405110932627e-07 -3.562065724880262e-09 9.409960581338499e-07
+  hidden angularVelocity_36 8.420299904374245e-08 -2.8121059466437322e-06 3.4586240743336884e-08
+  hidden translation_47 8.80703598937771e-09 -4.4202472793131165e-09 0.029997973591902094
+  hidden rotation_47 -0.0751978173913784 -0.004835872501053274 0.9971569097171851 3.443710595295922e-13
+  hidden linearVelocity_47 -3.7204454796439753e-07 -1.7828548615525368e-09 6.905135740842526e-07
+  hidden angularVelocity_47 8.972554795037075e-08 -7.19581887380447e-07 4.318970439914897e-08
+  hidden rotation_51 0.9999646027141985 -0.00594949823921932 0.00594952009298675 1.5708353979122898
+  hidden linearVelocity_51 -4.938123818746451e-07 -2.096941181021042e-08 6.098498932970033e-07
+  hidden angularVelocity_51 6.742858634003917e-08 -7.196779221365872e-07 8.091660964605579e-08
+  hidden rotation_52 0.9999995752345076 0.0006517390903533155 -0.0006517414843290649 1.5708004247655822
+  hidden linearVelocity_52 -2.435279639784316e-07 1.7574847986794695e-08 7.578584011182756e-07
+  hidden angularVelocity_52 1.2353546547466095e-07 -7.194368005451465e-07 -1.4028744880466116e-08
+  hidden rotation_53 0 0 1 0.024188547033349557
+  hidden position_53_0 -0.011647557146529186
+  hidden linearVelocity_53 -3.6014871831705175e-07 -1.1152715061701985e-08 5.115598133249609e-07
+  hidden angularVelocity_53 -1.4411437306048606e-07 -8.964879329338922e-05 -3.208385725965274e-07
+  hidden rotation_54 -0.9999660846862687 -0.005823625505765633 -0.005823646897175847 1.5708339158888596
+  hidden linearVelocity_54 2.0915973394797504e-07 -8.096390299639519e-09 -5.075014717159861e-07
+  hidden angularVelocity_54 -1.4137376746729196e-06 -8.965475596054422e-05 1.9513522984331896e-06
+  hidden rotation_55 0 0 0.9999999999999999 0.08573679428383817
+  hidden position_55_0 -0.02691580889898791
+  hidden linearVelocity_55 -2.491959204554739e-07 6.0027189079883e-09 5.801219034082751e-07
+  hidden angularVelocity_55 -1.426835006778466e-07 -8.910346249770019e-05 -3.1860089610204563e-07
+  hidden rotation_56 -0.9998189128031982 -0.013456230356426358 -0.013456279784011151 1.570981103594016
+  hidden linearVelocity_56 2.533843816403154e-07 8.593708634515116e-09 -4.65584042892028e-07
+  hidden angularVelocity_56 3.2069204421229727e-07 -8.910073448242944e-05 -1.282775341472733e-06
+  hidden rotation_57 0 0 -0.9999999999999999 0.003323667105372401
+  hidden position_57_0 -0.04774925607914639
+  hidden linearVelocity_57 -2.7688535182402336e-07 -8.751347993688475e-09 3.846206194289645e-07
+  hidden angularVelocity_57 -6.074576299683344e-08 -5.794440438821995e-05 -1.9105930225582478e-07
+  hidden rotation_58 -0.9994302748124189 -0.023865473011550176 -0.02386556067448843 1.5713698875111957
+  hidden linearVelocity_58 1.0933460012409648e-07 -6.7465205339752295e-09 -2.6427145639992423e-07
+  hidden angularVelocity_58 -9.089646104993531e-07 -5.7948005047241144e-05 1.2334610539411461e-06
+  hidden rotation_59 0 0 1 0.004065238213843094
+  hidden position_59_0 -0.046529283400444474
+  hidden linearVelocity_59 -1.5878185215314363e-07 8.393978613310576e-09 4.708811909217742e-07
+  hidden angularVelocity_59 -4.835556453485169e-08 -5.3230730292048036e-05 -1.717553866302891e-07
+  hidden rotation_60 -0.9994590024135381 -0.023256166077191793 -0.023256251502016597 1.5713411439515041
+  hidden linearVelocity_60 1.9168470516907267e-07 9.623152334338552e-09 -1.2795608415908414e-07
+  hidden angularVelocity_60 1.984799672728537e-06 -5.322186136999361e-05 -3.6444075889562314e-06
+  translation 2.5838444777740985 0.10568713963980439 10.053373263346435
+  rotation -0.93250718066392 -0.2536158767276774 -0.2571173760792512 1.6372512569034274
+  controller "tiago"
+  cameraSlot [
+    Display {
+      width 900
+      height 900
+    }
+    Compass {
+      translation -0.206 0 -0.041438
+    }
+    GPS {
+      translation -0.190515 0 -0.015552
+    }
+    Camera {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      recognition Recognition {
+        segmentation TRUE
+      }
+    }
+    RangeFinder {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      minRange 0.1
+      maxRange 5.6
+    }
+  ]
+}
