@@ -2,7 +2,7 @@
 # Copyright Prof. Bradley Hayes <bradley.hayes@colorado.edu> 2021
 # University of Colorado Boulder CSCI 3302 "Introduction to Robotics" Lab 3 Base Code.
 
-from controller import Robot, Motor, Camera, RangeFinder, Lidar, Keyboard, CameraRecognitionObject
+from controller import Robot, Motor, Camera, RangeFinder, Lidar, Keyboard, CameraRecognitionObject, GPS
 import math
 import numpy as np
 from matplotlib import pyplot as plt
@@ -22,9 +22,14 @@ MOTOR_RIGHT = 1 # Right wheel index
 
 # create the Robot instance.
 robot = Robot()
-
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())
+
+compass = robot.getDevice("compass")
+compass.enable(timestep)
+
+gps = robot.getDevice("gps")
+gps.enable(timestep)
 
 # The Turtlebot robot has two motors
 part_names = ("left wheel motor", "right wheel motor")
@@ -158,28 +163,7 @@ pose_theta = 0
 vL = 0
 vR = 0
 
-# goals = [(1.5, 1), (3, 5)]
-# goalsX = [1.5, 
-            # 2,
-            # 2,
-            # 1.74, 
-            # 1.5,
-            # 1,
-            # .25,
-            # .1,
-           # .1234]
-# goalsY = [1, 
-            # 2,
-            # 3,
-            # 3.75,
-            # 4,
-            # 4.5,
-            # 5,
-            # 5.5,
-            # 5.1]
 
-#for each robot we need to add their start and end points from astar
-#starting spot will be the same end will not
 startInMeters = (3.9,11.2)
 endInMeters = (5,8.8)
 
@@ -196,14 +180,14 @@ end = (int(endInMeters[0] * 30), int(endInMeters[1] *30))
 loadMap = np.load('map.npy')
 
 # Part 2.2: Compute an approximation of the “configuration space”
-kernel = np.ones((8, 8)) # Play with this number to find something suitable
+kernel = np.ones((10, 10)) # Play with this number to find something suitable
 convolved_map = convolve2d(loadMap, kernel, mode ='same') # You still have to threshold this convolved map
     
 convolved_map = np.multiply(convolved_map >0.5,1)
         
-fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
-plt.imshow(convolved_map)
-plt.show()
+# fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+# plt.imshow(convolved_map)
+# plt.show()
        
     # th, start_w = cv2.threshold(convolved_map, thresholded_map, 0, 255, cv2.THRESH_BINARY)
 
@@ -224,96 +208,68 @@ np.save("path", waypoints)
     # Part 2.4: Turn paths into waypoints and save on disk as path.npy and visualize it
     # np.save("path", path)
 waypoints = np.load('path.npy')
-for p in path: convolved_map[p[0]][p[1]] = 2
-fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
-plt.imshow(convolved_map)
-plt.show()
+# for p in path: convolved_map[p[0]][p[1]] = 2
+# fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+# plt.imshow(convolved_map)
+# plt.show()
 
+x_values=[i[0] for i in waypoints]
+y_values = [i[1] for i in waypoints]
 state =0
 counter =0
+# print(waypoints[0], waypoints[1])/
 while robot.step(timestep) != -1:
-    #Stopping criteria
-    if state == len(waypoints[state])-1:
+    pose_y = gps.getValues()[2]
+    pose_x = gps.getValues()[0]
+    dX = 0
+    dTheta = 0
+        #STEP 1: Calculate the error
+    rho = math.sqrt((waypoints[state][0] - pose_x)**2 +(waypoints[state][1] - pose_y)**2)
+    alpha = -(math.atan2(waypoints[state][1]-pose_y,waypoints[state][0]-pose_x) + pose_theta)
+    # print(waypoints[state][0], waypoints[state][1])
+    # print(pose_x, pose_y)
+    # print(rho, alpha)    
+        #STEP 2: Controller
+    if state == len(x_values)-1:
+            #print('autonomous if state')
         robot_parts[MOTOR_LEFT].setVelocity(0)
         robot_parts[MOTOR_RIGHT].setVelocity(0)
         break
 
-    if counter>0:
-        counter -=1
-        robot_parts[MOTOR_LEFT].setVelocity(0)
-        robot_parts[MOTOR_RIGHT].setVelocity(0)
-        continue
-
-
-     #STEP 2: Calculate sources of error
-    distanceError = math.sqrt((pose_x - waypoints[state][0])**2 + (pose_y - waypoints[state][1])**2)
+        # bearingError = math.atan2((y_values[state] - pose_y),(x_values[state] - pose_x)) - pose_theta
     
-    bearingError = math.atan2((waypoints[state][1] - pose_y),(waypoints[state][0] - pose_x)) - pose_theta
-    if bearingError < -3.1415: bearingError += 6.283
-    # if eta < -3.1415: eta += 6.283
-   
-    headingError = math.atan2((waypoints[state+1][1] - pose_y),(waypoints[state+1][0] - pose_x)) - pose_theta
-    
-    
-    if distanceError <.2 and abs(headingError) < 3.1415/4:
-        state +=1
-        counter =100
-        continue
-   
-    pass 
-    
-    
-    #STEP 2.4: Feedback Controller
-    xR = distanceError
-    bE = bearingError * 10
-    pass
-    
-    #STEP 1.2: Inverse Kinematics Equations 
-    vL = (2 * xR - bE* AXLE_LENGTH) / 2
-    vR = (2 * xR + bE* AXLE_LENGTH) / 2
-    
-    pass
-    
-    # STEP 2.5: Compute wheel velocities (vL, vR)
-    # Already calculated this in step 1.2!
-    
-    pass
-
-    #STEP 2.7: Proportional velocities
-    isnegL = 1
-    isnegR = 1
-    if vL < 0:
-        isnegL = -1
-    if vR < 0:
-        isnegR = -1
-    
-    max_val = max(abs(vL), abs(vR), MAX_SPEED)
-    vL += max_val
-    vR += max_val
-    
-    pctL = (vL / max(vL, vR) - .5) * 2.
-    pctR = (vR / max(vL, vR) - .5) * 2.
-   
-    vL = pctL * MAX_SPEED
-    vR = pctR * MAX_SPEED
-   
+    print("Abs Alpha: {:.3f}".format(abs(alpha)))
+    print("rho: {:.3f}".format(rho))
+    if abs(alpha)>.5:
+         
+        dX = 0
+        dTheta = 10*alpha
+    else:
+        dX = 10*rho
+        dTheta = 5*alpha
         
-
-    #STEP 2.6: Clamp wheel speeds
+    if rho <.6:
+            #print('distanceError') 
+        state +=1
+            # counter =100
+        continue
+    print("DX: {:.3f}".format(dX))
+    print("dTheta: {:.3f}".format(dTheta))
+        #STEP 3: Compute wheelspeeds
+    vL = (dX - dTheta * AXLE_LENGTH/2)
+    vR = (dX + dTheta * AXLE_LENGTH/2)
+       
+    if vL > MAX_SPEED:
+        
+        vL = MAX_SPEED
     if vR > MAX_SPEED:
         vR = MAX_SPEED
-    
-    if vL > MAX_SPEED:
-        vL = MAX_SPEED
-    
+        
+    if vL < -MAX_SPEED :
+        vL = -MAX_SPEED
     if vR < -MAX_SPEED:
         vR = -MAX_SPEED
-    
-    if vL < -MAX_SPEED:
-        vL = -MAX_SPEED
-    pass
-
- 
+        
     # Odometry code. Don't change speeds (vL and vR) after this line
     distL = vL/MAX_SPEED * MAX_SPEED_MS * timestep/1000.0
     distR = vR/MAX_SPEED * MAX_SPEED_MS * timestep/1000.0
@@ -324,7 +280,7 @@ while robot.step(timestep) != -1:
     # Important to not allow big fluctuations between timesteps (e.g., going from -pi to pi)
     if pose_theta > 6.28+3.14/2: pose_theta -= 6.28
     if pose_theta < -3.14: pose_theta += 6.28
-
+    
     # TODO: Set robot motors to the desired velocities
     robot_parts[MOTOR_LEFT].setVelocity(vL)
     robot_parts[MOTOR_RIGHT].setVelocity(vR)
