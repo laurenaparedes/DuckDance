@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.532612698399652 -0.5920134746188139 -0.6048501958114919 4.112786402202066
-  position 4.679270015175837 18.76308061630109 9.899271790978315
+  orientation 0.5138398894679568 -0.687338332583558 -0.5133561965660998 4.358739418452812
+  position 8.011190346212652 16.39109893560345 11.460196736530001
   follow "fence(2)"
 }
 TexturedBackground {
@@ -123,8 +123,26 @@ RectangleArena {
   }
 }
 TurtleBot3Burger {
-  translation 3.92 0 11.22
+  translation 3.16 0 11.96
   controller "finalTurtlebot"
+  extensionSlot [
+    Camera {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      recognition Recognition {
+        segmentation TRUE
+      }
+    }
+    GPS {
+      translation -0.190515 0 -0.015552
+    }
+    Compass {
+      translation -0.206 0 -0.041438
+    }
+    RobotisLds01 {
+    }
+  ]
 }
 Oak {
   translation 2.52 0 -11.95
@@ -397,9 +415,9 @@ SimpleTree {
   subdivision 5
 }
 TiagoSteel {
-  translation 2.58032 0.111331 10.0546
-  rotation 0.9310809087605929 0.2756919729841178 0.23891897658761382 -1.6198753071795862
-  controller "final"
+  translation 0.150026 0.01 11.1838
+  rotation -0.9838087719383959 0.10350697600553313 0.14630996608315913 1.5816
+  controller "tiago"
   cameraSlot [
     Display {
       width 900
