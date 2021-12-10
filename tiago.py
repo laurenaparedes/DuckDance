@@ -95,9 +95,9 @@ map = None
 
 ##################### IMPORTANT #####################
 # Set the mode here. Please change to 'autonomous' before submission
-mode = 'manual' # Part 1.1: manual mode
+# mode = 'manual' # Part 1.1: manual mode
 # mode = 'planner'
-# mode = 'autonomous'
+mode = 'autonomous'
 
 
 ###################
@@ -106,8 +106,8 @@ mode = 'manual' # Part 1.1: manual mode
 #
 ###################
 if mode == 'planner':
-    start_w = (2.58, 10.1) # Pose_X, Pose_Z in meters
-    end_w = (3.8, 9.7) # Pose_X, Pose_Z in meters
+    start_w = (15.150026, 26.1838) # Pose_X, Pose_Z in meters
+    end_w = (16.30141, 25.8879) # Pose_X, Pose_Z in meters
 
     # Convert the start_w and end_W from webot's coordinate frame to map's
     start = (int(start_w[0]*30), int(start_w[1]*30)) # (134, 241) # (x, y) in 360x360 map
@@ -392,7 +392,7 @@ while robot.step(timestep) != -1 and mode != 'planner':
             # filesystem = []
             
             filesystem = map > 0.5
-            map = np.multiply(map>0.5,1)
+            map = np.multiply(map > 0.5,1)
             np.save("map",map)
             print("Map file saved")
         
@@ -449,8 +449,8 @@ while robot.step(timestep) != -1 and mode != 'planner':
     
     # Odometry code. Don't change vL or vR speeds after this line.
     # We are using GPS and compass for this lab to get a better pose but this is how you'll do the odometry
-    pose_x += (vL+vR)/2/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0*math.cos(pose_theta)
-    pose_y -= (vL+vR)/2/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0*math.sin(pose_theta)
+    pose_x += (vL+vR)/2/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0*math.cos(pose_theta) 
+    pose_y -= (vL+vR)/2/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0*math.sin(pose_theta) 
     pose_theta += (vR-vL)/AXLE_LENGTH/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0
 
     # print("X: %f Z: %f Theta: %f" % (pose_x, pose_y, pose_theta))

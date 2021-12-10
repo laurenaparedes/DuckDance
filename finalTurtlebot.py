@@ -164,8 +164,8 @@ vL = 0
 vR = 0
 
 
-startInMeters = (3.9,11.2)
-endInMeters = (5,8.8)
+startInMeters = (17.53, 26.22) # Pose_X, Pose_Z in meters
+endInMeters = (18.16, 26.96) # Pose_X, Pose_Z in meters
 
 start = (int(startInMeters[0] * 30), int(startInMeters[1] *30))
 end = (int(endInMeters[0] * 30), int(endInMeters[1] *30))
@@ -185,9 +185,9 @@ convolved_map = convolve2d(loadMap, kernel, mode ='same') # You still have to th
     
 convolved_map = np.multiply(convolved_map >0.5,1)
         
-# fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
-# plt.imshow(convolved_map)
-# plt.show()
+fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+plt.imshow(convolved_map)
+plt.show()
        
     # th, start_w = cv2.threshold(convolved_map, thresholded_map, 0, 255, cv2.THRESH_BINARY)
 
@@ -208,10 +208,10 @@ np.save("path", waypoints)
     # Part 2.4: Turn paths into waypoints and save on disk as path.npy and visualize it
     # np.save("path", path)
 waypoints = np.load('path.npy')
-# for p in path: convolved_map[p[0]][p[1]] = 2
-# fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
-# plt.imshow(convolved_map)
-# plt.show()
+for p in path: convolved_map[p[0]][p[1]] = 2
+fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+plt.imshow(convolved_map)
+plt.show()
 
 x_values=[i[0] for i in waypoints]
 y_values = [i[1] for i in waypoints]
@@ -219,8 +219,8 @@ state =0
 counter =0
 # print(waypoints[0], waypoints[1])/
 while robot.step(timestep) != -1:
-    pose_y = gps.getValues()[2]
-    pose_x = gps.getValues()[0]
+    pose_y = gps.getValues()[2] 
+    pose_x = gps.getValues()[0] 
     dX = 0
     dTheta = 0
         #STEP 1: Calculate the error
@@ -273,8 +273,8 @@ while robot.step(timestep) != -1:
     # Odometry code. Don't change speeds (vL and vR) after this line
     distL = vL/MAX_SPEED * MAX_SPEED_MS * timestep/1000.0
     distR = vR/MAX_SPEED * MAX_SPEED_MS * timestep/1000.0
-    pose_x += (distL+distR) / 2.0 * math.cos(pose_theta)
-    pose_y += (distL+distR) / 2.0 * math.sin(pose_theta)
+    pose_x += (distL+distR) / 2.0 * math.cos(pose_theta) 
+    pose_y += (distL+distR) / 2.0 * math.sin(pose_theta) 
     pose_theta += (distR-distL)/AXLE_LENGTH
     # Bound pose_theta between [-pi, 2pi+pi/2]
     # Important to not allow big fluctuations between timesteps (e.g., going from -pi to pi)
