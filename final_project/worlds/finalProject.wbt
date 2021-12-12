@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.04911582674535107 -0.966732190665453 -0.25103088872546075 3.5397889746550892
-  position 8.682670690968525 10.520828463365447 -5.5485179322840406
+  orientation -0.02066338542564556 -0.8861433627772496 -0.46295028362511975 3.0756811541969307
+  position -1.023166526639581 6.117552721897776 8.653900716266751
   follow "fence(2)"
 }
 TexturedBackground {
@@ -123,7 +123,8 @@ RectangleArena {
   }
 }
 TurtleBot3Burger {
-  translation 3.16 0 11.96
+  translation -1.41 0.02 10.91
+  rotation 0 1 0 3.14159
   controller "finalTurtlebot"
   extensionSlot [
     Display {
@@ -447,8 +448,8 @@ SimpleTree {
   subdivision 5
 }
 TiagoSteel {
-  translation 0.150026 0.01 11.1838
-  rotation -0.9838087719383959 0.10350697600553313 0.14630996608315913 1.5816
+  translation -2.20831 0.161334 11.1627
+  rotation -0.018336702845169882 0.7030721090904732 0.710882110302293 -3.1189353071795862
   controller "tiago"
   cameraSlot [
     Display {
@@ -479,9 +480,9 @@ TiagoSteel {
   ]
 }
 TiagoSteel {
-  translation -1.96812 -0.0745367 10.4802
-  rotation -0.9838087719383959 0.10350697600553313 0.14630996608315913 1.5816
-  name "TIAGo Steel(1)"
+  translation -0.755715 0.139957 10.1678
+  rotation -0.018336702845169882 0.7030721090904732 0.710882110302293 -3.1189353071795862
+  name "TIAGo 2"
   controller "tiago2"
   cameraSlot [
     Display {
@@ -512,9 +513,9 @@ TiagoSteel {
   ]
 }
 TiagoSteel {
-  translation -0.984979 -0.0498533 11.7267
-  rotation -0.9838087719383959 0.10350697600553313 0.14630996608315913 1.5816
-  name "TIAGo Steel(2)"
+  translation -0.993379 0.14996 11.7287
+  rotation -0.018336602592286404 0.7030700993945879 0.7108841004992706 -3.1189353071795862
+  name "TIAGo 3"
   controller "tiago3"
   cameraSlot [
     Display {

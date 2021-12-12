@@ -86,11 +86,11 @@ mode = 'controller'
 #
 ###################
 if mode == 'planner':
-    startInMeters = (3.16, 12) # Pose_X, Pose_Z in meters
-    endInMeters = (5.6, 12) # Pose_X, Pose_Z in meters
+    startInMeters = (14.41, 25.91) # Pose_X, Pose_Z in meters
+    end_w = (8.63723, 23.76823) # Pose_X, Pose_Z in meters
 
     start = (int(startInMeters[0] * 30), int(startInMeters[1] *30))
-    end = (int(endInMeters[0] * 30), int(endInMeters[1] *30))
+    end = (int(end_w[0] * 30), int(end_w[1] *30))
     
     
     
