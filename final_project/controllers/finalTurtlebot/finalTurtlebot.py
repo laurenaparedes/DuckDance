@@ -75,7 +75,6 @@ vR = 0
 
 ##################### IMPORTANT #####################
 # Set the mode here. Please change to 'autonomous' before submission
-
 # mode = 'planner'
 mode = 'controller'
 
@@ -86,8 +85,8 @@ mode = 'controller'
 #
 ###################
 if mode == 'planner':
-    startInMeters = (14.41, 25.91) # Pose_X, Pose_Z in meters
-    end_w = (8.63723, 23.76823) # Pose_X, Pose_Z in meters
+    startInMeters = (14.74, 25.91) # Pose_X, Pose_Z in meters
+    end_w = (9.41594, 23.94844) # Pose_X, Pose_Z in meters
 
     start = (int(startInMeters[0] * 30), int(startInMeters[1] *30))
     end = (int(end_w[0] * 30), int(end_w[1] *30))

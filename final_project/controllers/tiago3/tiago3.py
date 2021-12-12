@@ -106,8 +106,8 @@ mode = 'autonomous'
 #
 ###################
 if mode == 'planner':
-    start_w = (15.120367, 26.0901) # Pose_X, Pose_Z in meters
-    end_w = (8.63723, 23.76823) # Pose_X, Pose_Z in meters
+    start_w = (14.276768, 26.6914) # Pose_X, Pose_Z in meters
+    end_w = (9.41594, 23.94844) # Pose_X, Pose_Z in meters
 
     # Convert the start_w and end_W from webot's coordinate frame to map's
     start = (int(start_w[0]*30), int(start_w[1]*30)) # (134, 241) # (x, y) in 360x360 map
