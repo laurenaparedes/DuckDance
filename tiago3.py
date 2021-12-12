@@ -106,7 +106,7 @@ mode = 'autonomous'
 #
 ###################
 if mode == 'planner':
-    start_w = (16.77757, 25.7647) # Pose_X, Pose_Z in meters
+    start_w = (15.120367, 26.0901) # Pose_X, Pose_Z in meters
     end_w = (8.63723, 23.76823) # Pose_X, Pose_Z in meters
 
     # Convert the start_w and end_W from webot's coordinate frame to map's
@@ -246,11 +246,14 @@ if mode == 'planner':
     
     # Part 2.3 continuation: Call path_planner
     np.save("convolved_map", convolved_map)
-    
+    # print("saved CM")
+    # print(convolved_map)
     path = path_planner(convolved_map, start, end)
-    # print(path)
+    # print("path finished")
     waypoints = []
+    # print(path)
     for p in path:
+        # print(path[p])
         g = ((p[0]) / 30, p[1] / 30)
         waypoints.append(g)
     np.save("path", waypoints)
@@ -258,6 +261,7 @@ if mode == 'planner':
     # Part 2.4: Turn paths into waypoints and save on disk as path.npy and visualize it
     # np.save("path", path)
     waypoints = np.load('path.npy')
+    # print("saved path")
     for p in path: convolved_map[p[0]][p[1]] = 2
     fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
     plt.imshow(convolved_map)
@@ -279,7 +283,10 @@ waypoints = []
 if mode == 'autonomous':
     # Part 3.1: Load path from disk and visualize it
     waypoints = np.load('path.npy') # Replace with code to load your path
-    # plt.imshow(waypoints)
+    
+    
+    for i in range(8):
+        np.delete(waypoints, -1)# plt.imshow(waypoints)
     # print(waypoints)
     x_values=[i[0] for i in waypoints]
     y_values = [i[1] for i in waypoints]
