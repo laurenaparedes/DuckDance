@@ -20,16 +20,15 @@ WHEEL_RADIUS = 0.33
 MOTOR_LEFT = 0 # Left wheel index
 MOTOR_RIGHT = 1 # Right wheel index
 
+##### vvv [Begin] Do Not Modify vvv #####
+
 # create the Robot instance.
 robot = Robot()
+# create camera instance
+camera = Camera(name = 'camera')
+
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())
-
-compass = robot.getDevice("compass")
-compass.enable(timestep)
-
-gps = robot.getDevice("gps")
-gps.enable(timestep)
 
 # The Turtlebot robot has two motors
 part_names = ("left wheel motor", "right wheel motor")
@@ -39,19 +38,76 @@ part_names = ("left wheel motor", "right wheel motor")
 target_pos = ('inf', 'inf')
 robot_parts = []
 
-class Node():
-    """A node class for A* Pathfinding"""
-    def __init__(self, parent=None, position=None):
-        self.parent = parent
-        self.position = position
-        self.g = 0
-        self.h = 0
-        self.f = 0
 
-    def __eq__(self, other):
-        return self.position == other.position
+# The Tiago robot has a couple more sensors than the e-Puck
+# Some of them are mentioned below. We will use its LiDAR for Lab 5
 
-def path_planner(map, start, end):
+
+# We are using a GPS and compass to disentangle mapping and localization
+gps = robot.getDevice("gps")
+gps.enable(timestep)
+compass = robot.getDevice("compass")
+compass.enable(timestep)
+
+# We are using a keyboard to remote control the robot
+keyboard = robot.getKeyboard()
+keyboard.enable(timestep)
+
+# The display is used to display the map. We are using 360x360 pixels to
+# map the 12x12m2 apartment
+display = robot.getDevice("display")
+
+for i in range(len(part_names)):
+        robot_parts.append(robot.getDevice(part_names[i]))
+        robot_parts[i].setPosition(float(target_pos[i]))
+
+# Odometry
+pose_x     = 0
+pose_y     = 0
+pose_theta = 0
+
+vL = 0
+vR = 0
+
+
+
+##### ^^^ [End] Do Not Modify ^^^ #####
+
+##################### IMPORTANT #####################
+# Set the mode here. Please change to 'autonomous' before submission
+
+# mode = 'planner'
+mode = 'controller'
+
+
+###################
+#
+# Planner
+#
+###################
+if mode == 'planner':
+    startInMeters = (14.41, 25.91) # Pose_X, Pose_Z in meters
+    end_w = (8.63723, 23.76823) # Pose_X, Pose_Z in meters
+
+    start = (int(startInMeters[0] * 30), int(startInMeters[1] *30))
+    end = (int(end_w[0] * 30), int(end_w[1] *30))
+    
+    
+    
+    class Node():
+        """A node class for A* Pathfinding"""
+        def __init__(self, parent=None, position=None):
+            self.parent = parent
+            self.position = position
+            self.g = 0
+            self.h = 0
+            self.f = 0
+
+        def __eq__(self, other):
+            return self.position == other.position
+
+# Part 2.3: Implement A* or Dijkstra's
+    def path_planner(map, start, end):
         '''
         # A* code adapted from
         # https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2
@@ -149,45 +205,19 @@ def path_planner(map, start, end):
                 else:
                     # Add the child to the open list
                     open_list.append(child)
-
-for i in range(len(part_names)):
-        robot_parts.append(robot.getDevice(part_names[i]))
-        robot_parts[i].setPosition(float(target_pos[i]))
-
-# Odometry
-pose_x     = 0
-pose_y     = 0
-pose_theta = 0
-
-# Rotational Motor Velocity [rad/s]
-vL = 0
-vR = 0
-
-
-startInMeters = (3.9,11.2)
-endInMeters = (5,8.8)
-
-start = (int(startInMeters[0] * 30), int(startInMeters[1] *30))
-end = (int(endInMeters[0] * 30), int(endInMeters[1] *30))
-#need to load in map from tiago steel
-#map = np.load("convolved_map.npy")
-
-#put into aStar 
-#path = path_planner(map,start,end)
-#print(path)
-#from here we need to actually drive along the path
-
-loadMap = np.load('map.npy')
-
-# Part 2.2: Compute an approximation of the “configuration space”
-kernel = np.ones((10, 10)) # Play with this number to find something suitable
-convolved_map = convolve2d(loadMap, kernel, mode ='same') # You still have to threshold this convolved map
     
-convolved_map = np.multiply(convolved_map >0.5,1)
+    # Part 2.1: Load map (map.npy) from disk and visualize it
+    loadMap = np.load('map.npy')
+
+    # Part 2.2: Compute an approximation of the “configuration space”
+    kernel = np.ones((10, 10)) # Play with this number to find something suitable
+    convolved_map = convolve2d(loadMap, kernel, mode ='same') # You still have to threshold this convolved map
+    
+    convolved_map = np.multiply(convolved_map >0.5,1)
         
-# fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
-# plt.imshow(convolved_map)
-# plt.show()
+    fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+    plt.imshow(convolved_map)
+    plt.show()
        
     # th, start_w = cv2.threshold(convolved_map, thresholded_map, 0, 255, cv2.THRESH_BINARY)
 
@@ -195,92 +225,136 @@ convolved_map = np.multiply(convolved_map >0.5,1)
         # for every 1 in the map array in the temp one make all surrounding blocks a 1 as well (like a square around)
         # repeat that a couple times to make the squares “denser”
     
-# Part 2.3 continuation: Call path_planner
-# np.save("convolved_map", convolved_map)
+    # Part 2.3 continuation: Call path_planner
+    np.save("convolved_mapTurtle", convolved_map)
     
-path = path_planner(convolved_map, start, end)
-waypoints = []
-for p in path:
-    g = ((p[0]) / 30, p[1] / 30)
-    waypoints.append(g)
-np.save("path", waypoints)
+    path = path_planner(convolved_map, start, end)
+    waypoints = []
+    for p in path:
+        g = ((p[0]) / 30, p[1] / 30)
+        waypoints.append(g)
+    np.save("pathTurtle", waypoints)
         
     # Part 2.4: Turn paths into waypoints and save on disk as path.npy and visualize it
     # np.save("path", path)
-waypoints = np.load('path.npy')
-# for p in path: convolved_map[p[0]][p[1]] = 2
-# fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
-# plt.imshow(convolved_map)
-# plt.show()
+    waypoints = np.load('pathTurtle.npy')
+    for p in path: convolved_map[p[0]][p[1]] = 2
+    fig = plt.figure(figsize=(12, 8), dpi=100, facecolor='w', edgecolor='k')
+    plt.imshow(convolved_map)
+    plt.show()
 
-x_values=[i[0] for i in waypoints]
-y_values = [i[1] for i in waypoints]
-state =0
-counter =0
-# print(waypoints[0], waypoints[1])/
-while robot.step(timestep) != -1:
-    pose_y = gps.getValues()[2]
-    pose_x = gps.getValues()[0]
-    dX = 0
-    dTheta = 0
-        #STEP 1: Calculate the error
-    rho = math.sqrt((waypoints[state][0] - pose_x)**2 +(waypoints[state][1] - pose_y)**2)
-    alpha = -(math.atan2(waypoints[state][1]-pose_y,waypoints[state][0]-pose_x) + pose_theta)
-    # print(waypoints[state][0], waypoints[state][1])
-    # print(pose_x, pose_y)
-    # print(rho, alpha)    
-        #STEP 2: Controller
-    if state == len(x_values)-1:
-            #print('autonomous if state')
-        robot_parts[MOTOR_LEFT].setVelocity(0)
-        robot_parts[MOTOR_RIGHT].setVelocity(0)
-        break
+######################
+#
+# Map Initialization
+#
+######################
 
-        # bearingError = math.atan2((y_values[state] - pose_y),(x_values[state] - pose_x)) - pose_theta
+# Part 1.2: Map Initialization
+
+# Initialize your map data structure here as a 2D floating point array
+map = np.zeros((900, 900), dtype = np.float64) # Replace None by a numpy 2D floating point array
+waypoints = []
+
+
+if mode == 'controller':
+    # Part 3.1: Load path from disk and visualize it
+    waypoints = np.load('pathTurtle.npy') # Replace with code to load your path
+    # plt.imshow(waypoints)
+    # print(waypoints)
+    x_values=[i[0] for i in waypoints]
+    y_values = [i[1] for i in waypoints]
     
-    print("Abs Alpha: {:.3f}".format(abs(alpha)))
-    print("rho: {:.3f}".format(rho))
-    if abs(alpha)>.5:
-         
-        dX = 0
-        dTheta = 10*alpha
-    else:
-        dX = 10*rho
-        dTheta = 5*alpha
+    state = 0 # use this to iterate through your path
+
+    while robot.step(timestep) != -1:
         
-    if rho <.6:
-            #print('distanceError') 
-        state +=1
-            # counter =100
-        continue
-    print("DX: {:.3f}".format(dX))
-    print("dTheta: {:.3f}".format(dTheta))
-        #STEP 3: Compute wheelspeeds
-    vL = (dX - dTheta * AXLE_LENGTH/2)
-    vR = (dX + dTheta * AXLE_LENGTH/2)
-       
-    if vL > MAX_SPEED:
+            ###################
+            #
+            # Mapping
+            #
+            ###################
         
-        vL = MAX_SPEED
-    if vR > MAX_SPEED:
-        vR = MAX_SPEED
+            ################ v [Begin] Do not modify v ##################
+            # Ground truth pose
+         pose_y = gps.getValues()[2] + 15
+         pose_x = gps.getValues()[0] + 15
         
-    if vL < -MAX_SPEED :
-        vL = -MAX_SPEED
-    if vR < -MAX_SPEED:
-        vR = -MAX_SPEED
+         n = compass.getValues()
+         rad = -((math.atan2(n[0], n[2]))-1.5708)
+         pose_theta = rad
         
-    # Odometry code. Don't change speeds (vL and vR) after this line
-    distL = vL/MAX_SPEED * MAX_SPEED_MS * timestep/1000.0
-    distR = vR/MAX_SPEED * MAX_SPEED_MS * timestep/1000.0
-    pose_x += (distL+distR) / 2.0 * math.cos(pose_theta)
-    pose_y += (distL+distR) / 2.0 * math.sin(pose_theta)
-    pose_theta += (distR-distL)/AXLE_LENGTH
-    # Bound pose_theta between [-pi, 2pi+pi/2]
-    # Important to not allow big fluctuations between timesteps (e.g., going from -pi to pi)
-    if pose_theta > 6.28+3.14/2: pose_theta -= 6.28
-    if pose_theta < -3.14: pose_theta += 6.28
-    
-    # TODO: Set robot motors to the desired velocities
-    robot_parts[MOTOR_LEFT].setVelocity(vL)
-    robot_parts[MOTOR_RIGHT].setVelocity(vR)
+        
+        
+            # Draw the robot's current pose on the 360x360 display
+         display.setColor(int(0xFFFF))
+         display.drawPixel(900-int(pose_y*30),int(pose_x*30))
+            
+         display.setColor(0x00FF00)
+         path_on_map = []
+         for p in waypoints:
+            p_on_map = (int(p[0]*30), int(p[1]*30))
+            path_on_map.append(p_on_map)
+         for i in range(len(path_on_map)):
+             if i > 0:
+               display.drawLine(900-path_on_map[i-1][1],path_on_map[i-1][0],900-path_on_map[i][1],path_on_map[i][0])
+        
+            ###################
+            #
+            # Controller
+            #
+            ###################
+         # not manual mode
+                # Part 3.2: Feedback controller
+         dX = 0
+         dTheta = 0
+                #STEP 1: Calculate the error
+         rho = math.sqrt((waypoints[state][0] - pose_x)**2 +(waypoints[state][1] - pose_y)**2)
+         alpha = -(math.atan2(waypoints[state][1]-pose_y,waypoints[state][0]-pose_x) + pose_theta)
+                
+                #STEP 2: Controller
+         if state == len(x_values)-1:
+                    #print('autonomous if state')
+             robot_parts[MOTOR_LEFT].setVelocity(0)
+             robot_parts[MOTOR_RIGHT].setVelocity(0)
+             break
+        
+                # bearingError = math.atan2((y_values[state] - pose_y),(x_values[state] - pose_x)) - pose_theta
+         if abs(alpha)>0.25:
+             dX = 0
+             dTheta = 10*alpha
+         else:
+             dX = 10*rho
+             dTheta = 5*alpha
+                
+         if rho <.4:
+                    #print('distanceError') 
+              state +=1
+                    # counter =100
+              continue
+        
+                #STEP 3: Compute wheelspeeds
+         vL = (dX - dTheta * AXLE_LENGTH/2)
+         vR = (dX + dTheta * AXLE_LENGTH/2)
+               
+         if vL > MAX_SPEED:
+              vL = MAX_SPEED
+         if vR > MAX_SPEED:
+              vR = MAX_SPEED
+                
+         if vL < -MAX_SPEED :
+              vL = -MAX_SPEED
+         if vR < -MAX_SPEED:
+              vR = -MAX_SPEED
+                
+            
+            # Odometry code. Don't change vL or vR speeds after this line.
+            # We are using GPS and compass for this lab to get a better pose but this is how you'll do the odometry
+         pose_x += (vL+vR)/2/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0*math.cos(pose_theta) 
+         pose_y -= (vL+vR)/2/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0*math.sin(pose_theta) 
+         pose_theta += (vR-vL)/AXLE_LENGTH/MAX_SPEED*MAX_SPEED_MS*timestep/1000.0
+        
+            # print("X: %f Z: %f Theta: %f" % (pose_x, pose_y, pose_theta))
+        
+            # Actuator commands
+         robot_parts[MOTOR_LEFT].setVelocity(vL)
+         robot_parts[MOTOR_RIGHT].setVelocity(vR)

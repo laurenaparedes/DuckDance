@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.532612698399652 -0.5920134746188139 -0.6048501958114919 4.112786402202066
-  position 4.679270015175837 18.76308061630109 9.899271790978315
+  orientation -0.15673660687535654 -0.7452259569181308 -0.6481295466190814 2.7943742446125057
+  position -0.6530008831343943 8.490421145747439 9.815184947152767
   follow "fence(2)"
 }
 TexturedBackground {
@@ -123,8 +123,31 @@ RectangleArena {
   }
 }
 TurtleBot3Burger {
-  translation 3.92 0 11.22
+  translation -1.41 0.02 10.91
+  rotation 0 1 0 -1.3089953071795861
   controller "finalTurtlebot"
+  extensionSlot [
+    Display {
+      width 900
+      height 900
+    }
+    Camera {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      recognition Recognition {
+        segmentation TRUE
+      }
+    }
+    GPS {
+      translation -0.190515 0 -0.015552
+    }
+    Compass {
+      translation -0.206 0 -0.041438
+    }
+    RobotisLds01 {
+    }
+  ]
 }
 Oak {
   translation 2.52 0 -11.95
@@ -132,6 +155,34 @@ Oak {
 Oak {
   translation 11.25 0 -12.95
   name "oak tree(8)"
+}
+TurtleBot3Burger {
+  translation 2.05 0 12.39
+  name "TurtleBot3Burger(1)"
+  controller "TestTurtle"
+  extensionSlot [
+    Display {
+      width 900
+      height 900
+    }
+    Camera {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      recognition Recognition {
+        segmentation TRUE
+      }
+    }
+    GPS {
+      translation -0.190515 0 -0.015552
+    }
+    Compass {
+      translation -0.206 0 -0.041438
+      name "compass(1)"
+    }
+    RobotisLds01 {
+    }
+  ]
 }
 Oak {
   translation 13.48 0 -9.99
@@ -397,9 +448,75 @@ SimpleTree {
   subdivision 5
 }
 TiagoSteel {
-  translation 2.58032 0.111331 10.0546
-  rotation 0.9310809087605929 0.2756919729841178 0.23891897658761382 -1.6198753071795862
-  controller "final"
+  translation 0.144146 0.149868 11.1852
+  rotation -0.018336702845169882 0.7030721090904732 0.710882110302293 -3.1189353071795862
+  controller "tiago"
+  cameraSlot [
+    Display {
+      width 900
+      height 900
+    }
+    Compass {
+      translation -0.206 0 -0.041438
+    }
+    GPS {
+      translation -0.190515 0 -0.015552
+    }
+    Camera {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      recognition Recognition {
+        segmentation TRUE
+      }
+    }
+    RangeFinder {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      minRange 0.1
+      maxRange 5.6
+    }
+  ]
+}
+TiagoSteel {
+  translation -0.755715 0.139957 10.1678
+  rotation -0.018336702845169882 0.7030721090904732 0.710882110302293 -3.1189353071795862
+  name "TIAGo 2"
+  controller "tiago2"
+  cameraSlot [
+    Display {
+      width 900
+      height 900
+    }
+    Compass {
+      translation -0.206 0 -0.041438
+    }
+    GPS {
+      translation -0.190515 0 -0.015552
+    }
+    Camera {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      recognition Recognition {
+        segmentation TRUE
+      }
+    }
+    RangeFinder {
+      rotation 0 1 0 -1.57
+      width 320
+      height 240
+      minRange 0.1
+      maxRange 5.6
+    }
+  ]
+}
+TiagoSteel {
+  translation -0.993379 0.14996 11.7287
+  rotation -0.018336602592286404 0.7030700993945879 0.7108841004992706 -3.1189353071795862
+  name "TIAGo 3"
+  controller "tiago3"
   cameraSlot [
     Display {
       width 900
