@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.014766592186793309 0.9097278661641475 0.4149423541645463 3.0621853048442693
-  position 11.534715324598062 20.357569124384472 8.36877212026178
+  orientation -0.5719087463371425 -0.783479392832331 -0.24306465574031905 1.018575596800221
+  position 21.04076893644667 5.609241585101507 29.928926035283546
   follow "bottom fence"
 }
 TexturedBackground {
@@ -27,6 +27,85 @@ Bench {
   translation 24.2852 0 7.85153
   rotation 0 -1 0 0.785401
   name "bench 2"
+}
+DEF EPUCK E-puck {
+  translation 23.54 0.17 25.16
+  rotation 0 1 0 3.1415
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EPUCK E-puck {
+  translation 24.83 0.17 25.26
+  rotation 0 1 0 3.1415
+  name "e-puck(4)"
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EPUCK E-puck {
+  translation 23.4 0.17 27.19
+  rotation 0 1 0 3.1415
+  name "e-puck(5)"
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EPUCK E-puck {
+  translation 26.1 0.17 25.26
+  rotation 0 1 0 3.1415
+  name "e-puck(1)"
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EPUCK E-puck {
+  translation 27.83 0.17 24.59
+  rotation 0 1 0 3.1415
+  name "e-puck(6)"
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EPUCK E-puck {
+  translation 25.68 0.17 22.54
+  rotation 0 1 0 3.1415
+  name "e-puck(2)"
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EPUCK E-puck {
+  translation 25.26 0.17 27.82
+  rotation 0 1 0 3.1415
+  name "e-puck(3)"
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EPUCK E-puck {
+  translation 26.42 0.17 26.79
+  rotation 0 1 0 3.1415
+  name "e-puck(7)"
+  controller "lineFollowerTurtlebot"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
 }
 Bench {
   translation 7.94 0 7.92
@@ -405,8 +484,8 @@ SimpleTree {
   subdivision 5
 }
 TiagoSteel {
-  translation 8.0846 0.148383 24.8247
-  rotation 0 0.7032002771543258 0.7109918214790374 -3.1415926335900695
+  translation 8.08 0.170046 24.8
+  rotation -0.9344591008650535 0.2503880270267599 0.2531640273264 1.62753
   controller "tiago"
   cameraSlot [
     Display {
@@ -437,7 +516,7 @@ TiagoSteel {
   ]
 }
 TiagoSteel {
-  translation 13.3875 0.127859 27.3486
+  translation 13.4 0.0924232 27.3
   rotation 0 0.7031903375154068 0.7110016520550204 -3.1189353071795862
   name "TIAGo 2"
   controller "tiago2"
@@ -470,8 +549,8 @@ TiagoSteel {
   ]
 }
 TiagoSteel {
-  translation 17.7978 0.210919 27.3052
-  rotation 0 0.7031883261884637 0.7110036412791897 -3.1189353071795862
+  translation 17.8 0.257461 27.3
+  rotation 0.9998702866736309 7.191412061855657e-09 -0.01610620461782315 -1.5598753071795866
   name "TIAGo 3"
   controller "tiago3"
   cameraSlot [
