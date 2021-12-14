@@ -85,8 +85,8 @@ mode = 'controller'
 #
 ###################
 if mode == 'planner':
-    startInMeters = (14.74, 25.91) # Pose_X, Pose_Z in meters
-    end_w = (9.41594, 23.94844) # Pose_X, Pose_Z in meters
+    startInMeters = (14.84, 22.88) # Pose_X, Pose_Z in meters
+    end_w = (9.0746, 21.3047) # Pose_X, Pose_Z in meters
 
     start = (int(startInMeters[0] * 30), int(startInMeters[1] *30))
     end = (int(end_w[0] * 30), int(end_w[1] *30))
@@ -251,7 +251,7 @@ if mode == 'planner':
 # Part 1.2: Map Initialization
 
 # Initialize your map data structure here as a 2D floating point array
-map = np.zeros((900, 900), dtype = np.float64) # Replace None by a numpy 2D floating point array
+map = np.zeros((912, 912), dtype = np.float64) # Replace None by a numpy 2D floating point array
 waypoints = []
 
 
@@ -275,8 +275,8 @@ if mode == 'controller':
         
             ################ v [Begin] Do not modify v ##################
             # Ground truth pose
-         pose_y = gps.getValues()[2] + 15
-         pose_x = gps.getValues()[0] + 15
+         pose_y = gps.getValues()[2]
+         pose_x = gps.getValues()[0]
         
          n = compass.getValues()
          rad = -((math.atan2(n[0], n[2]))-1.5708)
@@ -286,7 +286,7 @@ if mode == 'controller':
         
             # Draw the robot's current pose on the 360x360 display
          display.setColor(int(0xFFFF))
-         display.drawPixel(900-int(pose_y*30),int(pose_x*30))
+         display.drawPixel(912-int(pose_y*30),int(pose_x*30))
             
          display.setColor(0x00FF00)
          path_on_map = []
@@ -295,7 +295,7 @@ if mode == 'controller':
             path_on_map.append(p_on_map)
          for i in range(len(path_on_map)):
              if i > 0:
-               display.drawLine(900-path_on_map[i-1][1],path_on_map[i-1][0],900-path_on_map[i][1],path_on_map[i][0])
+               display.drawLine(912-path_on_map[i-1][1],path_on_map[i-1][0],912-path_on_map[i][1],path_on_map[i][0])
         
             ###################
             #

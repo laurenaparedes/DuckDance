@@ -6,6 +6,7 @@ from matplotlib import pyplot as plt
 from scipy.signal import convolve2d # Uncomment if you want to use something else for finding the configuration space
 # from ikpy.chain import Chain
 # from ikpy.link import OriginLink, URDFLink
+import time
 
 
 # import pybullet as p
@@ -106,8 +107,8 @@ mode = 'autonomous'
 #
 ###################
 if mode == 'planner':
-    start_w = (14.276768, 26.6914) # Pose_X, Pose_Z in meters
-    end_w = (9.41594, 23.94844) # Pose_X, Pose_Z in meters
+    start_w = (25.4329, 16.2008) # Pose_X, Pose_Z in meters
+    end_w = (13.8746, 6.60275) # Pose_X, Pose_Z in meters
 
     # Convert the start_w and end_W from webot's coordinate frame to map's
     start = (int(start_w[0]*30), int(start_w[1]*30)) # (134, 241) # (x, y) in 360x360 map
@@ -276,7 +277,7 @@ if mode == 'planner':
 # Part 1.2: Map Initialization
 
 # Initialize your map data structure here as a 2D floating point array
-map = np.zeros((900, 900), dtype = np.float64) # Replace None by a numpy 2D floating point array
+map = np.zeros((912, 912), dtype = np.float64) # Replace None by a numpy 2D floating point array
 waypoints = []
 
 
@@ -303,8 +304,8 @@ while robot.step(timestep) != -1 and mode != 'planner':
 
     ################ v [Begin] Do not modify v ##################
     # Ground truth pose
-    pose_y = gps.getValues()[2] + 15
-    pose_x = gps.getValues()[0] + 15
+    pose_y = gps.getValues()[2] 
+    pose_x = gps.getValues()[0] 
 
     n = compass.getValues()
     rad = -((math.atan2(n[0], n[2]))-1.5708)
@@ -339,10 +340,10 @@ while robot.step(timestep) != -1 and mode != 'planner':
             
             # print("Rho: %f Alpha: %f rx: %f ry: %f wx: %f wy: %f" % (rho,alpha,rx,ry,wx,wy))
            
-            if int(wx * 30) > 899 or int(wx * 30) < 0:
+            if int(wx * 30) > 911 or int(wx * 30) < 0:
                 pass
             
-            elif int(wy * 30) > 899 or int(wy * 30) < 0:
+            elif int(wy * 30) > 911 or int(wy * 30) < 0:
                 pass
             
             else:
@@ -356,11 +357,11 @@ while robot.step(timestep) != -1 and mode != 'planner':
                 color = (g*256**2+g*256+g)
                 
                 display.setColor(color)
-                display.drawPixel(900-int(wy*30),int(wx*30))
+                display.drawPixel(912-int(wy*30),int(wx*30))
     
     # Draw the robot's current pose on the 360x360 display
     display.setColor(int(0xFF0000))
-    display.drawPixel(900-int(pose_y*30),int(pose_x*30))
+    display.drawPixel(912-int(pose_y*30),int(pose_x*30))
     
     display.setColor(0x00FF00)
     path_on_map = []
@@ -369,7 +370,7 @@ while robot.step(timestep) != -1 and mode != 'planner':
         path_on_map.append(p_on_map)
     for i in range(len(path_on_map)):
         if i > 0:
-            display.drawLine(900-path_on_map[i-1][1],path_on_map[i-1][0],900-path_on_map[i][1],path_on_map[i][0])
+            display.drawLine(912-path_on_map[i-1][1],path_on_map[i-1][0],912-path_on_map[i][1],path_on_map[i][0])
 
     ###################
     #

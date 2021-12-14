@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.48885116102079235 0.7705572403708487 0.4089817620391959 4.615437242110658
-  position -5.562839398170571 22.17225634218188 14.110037195133451
+  orientation 0.6338940367491188 0.49972753047725754 0.5902971670752017 4.116353077204924
+  position 29.65613080704262 11.57716181068826 25.684693395242487
   follow "bottom fence 1"
   followType "None"
 }
@@ -277,7 +277,7 @@ Fence {
   poleGap 0.3
   path [
     0 0 0
-    7 0 0
+    3.25 0 0
   ]
 }
 Fence {
@@ -505,35 +505,9 @@ CircleArena {
   wallAppearance Pavement {
   }
 }
-Pedestrian {
-  translation -0.46 1.27 17.66
-  rotation 0 1 0 0.785398
-}
-Atlas {
-  translation 8.36392 0.97004 11.7581
-  rotation 0.9351132545462786 0.25056306820553154 0.25056206820525934 -1.6378353071795866
-}
-Atlas {
-  translation 23.3505 0.970053 20.4531
-  rotation 0.1861570160863869 -0.6947470600351803 -0.6947460600350939 -2.7734953071795863
-  name "Atlas 2"
-}
-Spot {
-  translation 10.4617 0.624 6.785
-  rotation 0 1 0 -2.6179953071795863
-}
-Pr2 {
-  translation 20.9169 -0.00679383 8.50626
-  rotation -0.37783609820018144 -0.6544301700874049 -0.6549511702228137 2.41856
-}
-Pr2 {
-  translation 19.8896 -0.00628117 8.00355
-  rotation 0.4767581597964895 0.6213232082507986 0.6218192084170445 -2.2512053071795863
-  name "PR2(1)"
-}
 TiagoSteel {
-  translation 6.1246 0.203803 19.7947
-  rotation -1 -4.7949e-09 9.37248e-09 1.55978
+  translation 13.8746 0.159122 6.60275
+  rotation 0.09218403032514015 0.700207230342309 0.7079632328937473 -2.9557153071795863
   controller "tiago"
   cameraSlot [
     Display {
@@ -564,8 +538,8 @@ TiagoSteel {
   ]
 }
 TiagoSteel {
-  translation 3.25812 0.0145029 23.0502
-  rotation 0 0.7031903375154068 0.7110016520550204 -3.1189353071795862
+  translation 12.9356 0.148871 24.8258
+  rotation 0.9998702399672371 6.990461677699473e-07 -0.01610910386615882 -1.5598853071795862
   name "TIAGo 2"
   controller "tiago2"
   cameraSlot [
@@ -597,8 +571,8 @@ TiagoSteel {
   ]
 }
 TiagoSteel {
-  translation 17.8348 0.185574 29.625
-  rotation 0 0.7031883261884637 0.7110036412791897 -3.1189353071795862
+  translation 25.4329 0.196704 16.2008
+  rotation -0.572111916741417 0.572111916741417 0.5876869144748111 2.10658
   name "TIAGo 3"
   controller "tiago3"
   cameraSlot [
@@ -626,6 +600,96 @@ TiagoSteel {
       height 240
       minRange 0.1
       maxRange 5.6
+    }
+  ]
+}
+TurtleBot3Burger {
+  translation 20.6 -7.10543e-15 14.9
+  controller "turtleGoForward"
+}
+TurtleBot3Burger {
+  translation 20.9 -7.10543e-15 14.8
+  name "TurtleBot3Burger(1)"
+  controller "turtleGoForward"
+}
+TurtleBot3Burger {
+  translation 20.95 -7.10543e-15 15.1
+  name "TurtleBot3Burger(2)"
+  controller "turtleGoForward"
+}
+TurtleBot3Burger {
+  translation 20.6434 -7.10543e-15 15.2029
+  name "TurtleBot3Burger(3)"
+  controller "turtleGoForward"
+}
+E-puck {
+  translation 25.03 0 27.7
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+E-puck {
+  translation 26.39 0 27.8
+  name "e-puck(1)"
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+E-puck {
+  translation 26.49 0 26
+  name "e-puck(2)"
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+E-puck {
+  translation 28.42 0 26.1
+  name "e-puck(3)"
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+E-puck {
+  translation 28.52 0 27.21
+  name "e-puck(4)"
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+E-puck {
+  translation 28.62 0 26.18
+  name "e-puck(5)"
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+E-puck {
+  translation 25.07 0 26.28
+  name "e-puck(6)"
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+E-puck {
+  translation 25.87 0 26.86
+  name "e-puck(7)"
+  controller "lineFollowerEpuck"
+  groundSensorsSlot [
+    E-puckGroundSensors {
     }
   ]
 }
