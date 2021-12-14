@@ -1,9 +1,9 @@
 # A Day At The Park
 How to run it: Download FinalProject and select the Webot world inside the world folder
 
-Lauren Paredes  lapa5112@colorado.edu
-Nova White       nayi2037@colorado.edu
-Ali Keller	     alke5276@colorado.edu 
+Lauren Paredes:  lapa5112@colorado.edu
+Nova White:       nayi2037@colorado.edu
+Ali Keller:	     alke5276@colorado.edu 
 
 Project Name: A Day at the Park
 
