@@ -9,13 +9,11 @@ Project Name: A Day at the Park
 
 Abstract:
 	
-  A day at the park features many different types of robots enjoying the weather. They are at a park which we created where humans are not allowed. Inside the park      
-  you will see the TIAGo steel ‘moms’ following along the shortest path around the pond. In the pond you will see turtle bot ‘ducks’ swimming around the pond 
-  staying in a group. Then in the playground there are multiple E-pucks ‘kids’ running around while avoiding obstacles.
+  A day at the park features many different types of robots enjoying the weather. They are at a park which we created where humans are not allowed. Inside the park     you will see the TIAGo steel ‘moms’ following along the shortest path around the pond. In the pond you will see turtle bot ‘ducks’ swimming around the pond staying in a group. Then in the playground there are multiple E-pucks ‘kids’ running around while avoiding obstacles.
 
 Equipment:
 
-  Webots
-  Tiago steel
-  Turtle bot
-  E-puck
+  Webots, 
+  Tiago steel, 
+  Turtle bot, 
+  E-puck 
